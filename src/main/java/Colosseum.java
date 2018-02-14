@@ -10,10 +10,26 @@ import java.util.Scanner;
  * @see <a href="https://cs125.cs.illinois.edu/lab/4/">Lab 4 Description</a>
  */
 public class Colosseum {
+
+    /**
+     * the times used to import points.
+     */
+    static final int TIMES = 500;
+
     /**
      * The maximum number of hit points we will allow a Pokemon to start with.
      */
     static final int MAX_HIT_POINTS = 50;
+
+    /**
+     * The maximum number of attack points.
+     */
+    static final int MAX_ATTACK_POINTS = 49;
+
+    /**
+     * The maximum number of defense points.
+     */
+    static final int MAX_DEFENSE_POINTS = 23;
 
     /**
      * The maximum number of rounds we will let the Pokemon battle.
@@ -73,6 +89,39 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon tempPokemon = new Pokemon();
+        Scanner lineScanner = new Scanner(System.in);
+        System.out.println("Please name you Pokemon:");
+        String name = lineScanner.next();
+        System.out.println("How many hit points will it have?(1-50)");
+        int hitPt = lineScanner.nextInt();
+        for (int i = 0; i < TIMES; i++) {
+            if (hitPt < 1 || hitPt > MAX_HIT_POINTS) {
+                System.out.println("Sorry. Hit points must be between 1 and 50");
+                hitPt = lineScanner.nextInt();
+            } else {
+                break;
+            }
+        }
+        System.out.println("Enter your attack level(1-49):");
+        int attackLevel = lineScanner.nextInt();
+        for (int i = 0; i < TIMES; i++) {
+            if (attackLevel < 1 || attackLevel > MAX_ATTACK_POINTS) {
+                System.out.println("Sorry. The attack level must be between 1 and 49");
+                attackLevel = lineScanner.nextInt();
+            } else {
+                break;
+            }
+        }
+        System.out.println("Enter your defense level(1-23):");
+        int defenseLevel = lineScanner.nextInt();
+        for (int i = 0; i < TIMES; i++) {
+            if (defenseLevel < 1 || defenseLevel > MAX_DEFENSE_POINTS) {
+                System.out.println("Sorry. The defense level must be between 1 and 23");
+                defenseLevel = lineScanner.nextInt();
+            } else {
+                break;
+            }
+        }
         return tempPokemon;
     }
 
@@ -91,6 +140,19 @@ public class Colosseum {
      */
     public static void printWhoIsAhead() {
         System.out.println("Implement me!");
+        firstPokemon = buildPokemon();
+        firstPokemon.name = buildPokemon().name;
+        firstPokemon.hitPoints = buildPokemon().hitPoints;
+        secondPokemon = buildPokemon();
+        secondPokemon.name = buildPokemon().name;
+        secondPokemon.hitPoints = buildPokemon().hitPoints;
+        if (firstPokemon.hitPoints > secondPokemon.hitPoints) {
+            System.out.println(firstPokemon.name + " is currently ahead");
+        } else if (firstPokemon.hitPoints == secondPokemon.hitPoints) {
+            System.out.println("They are tie!");
+        } else {
+            System.out.println(secondPokemon.name + " is currently ahead");
+        }
     }
 
     /**
